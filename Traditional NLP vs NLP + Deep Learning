@@ -1,0 +1,11 @@
+| Traditional NLP + ML                                  | NLP + Deep Learning                                                           |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Manual feature extraction (Bag of Words, TF-IDF)      | Learns features automatically from data                                       |
+| Algorithms like Naive Bayes, SVM, Logistic Regression | Neural networks like LSTM, GRU, Transformer                                   |
+| Works well on smaller datasets                        | Excels with large datasets                                                    |
+| Limited understanding of context                      | Strong understanding of context and semantics                                 |
+| Faster to train                                       | Typically requires more computation                                           |
+| Good for simpler classification tasks                 | Best for complex tasks like translation, summarization, and conversational AI |
+
+
+=====================
