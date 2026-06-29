@@ -1,0 +1,51 @@
+| **Topic**        | **Description**                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Full Form**    | Recurrent Neural Network (RNN)                                                                                  |
+| **Definition**   | RNN is a deep learning algorithm designed to process **sequential data** such as text, speech, and time series. |
+| **Main Feature** | It remembers information from previous inputs using a **hidden state (memory)**.                                |
+| **Input**        | Sequence of words, numbers, or time-series values.                                                              |
+| **Output**       | Prediction at each time step or at the end of the sequence.                                                     |
+| **Memory**       | Stores previous information using a hidden state.                                                               |
+| **Best For**     | Language Translation, Text Generation, Sentiment Analysis, Speech Recognition, Time Series Forecasting.         |
+| **Limitation**   | Suffers from the **Vanishing Gradient Problem**, making it difficult to learn long-term dependencies.           |
+| **Solution**     | LSTM and GRU were developed to overcome this limitation.                                                        |
+
+
+==============
+
+RNN Workflow
+-----------
+
+| **Step** | **Description**                                             |
+| -------- | ----------------------------------------------------------- |
+| 1        | Receive the first input word.                               |
+| 2        | Store information in the hidden state.                      |
+| 3        | Process the next word along with the previous hidden state. |
+| 4        | Update the hidden state.                                    |
+| 5        | Continue until all words are processed.                     |
+| 6        | Produce the final output or prediction.                     |
+
+==========
+
+RNN vs LSTM vs GRU
+------------------
+
+| **Feature**            | **RNN**    | **LSTM**  | **GRU**          |
+| ---------------------- | ---------- | --------- | ---------------- |
+| Memory                 | Short-term | Long-term | Long-term        |
+| Handles Long Sequences | ❌ No       | ✅ Yes     | ✅ Yes            |
+| Vanishing Gradient     | ❌ Yes      | ✅ Solved  | ✅ Solved         |
+| Speed                  | Fast       | Slower    | Faster than LSTM |
+| Translation Accuracy   | Moderate   | High      | High             |
+
+
+=========
+RNN (Recurrent Neural Network) is a deep learning model designed for sequential data. 
+It processes one element at a time and maintains a hidden state that stores information from previous inputs. 
+This makes it suitable for applications such as language translation, sentiment analysis, speech recognition, 
+and time-series forecasting. However, standard RNNs have difficulty learning long-term dependencies due to the vanishing gradient problem, 
+which is why LSTM and GRU are commonly used instead.
+
+===========
+
+
