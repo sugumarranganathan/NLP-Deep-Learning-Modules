@@ -163,6 +163,122 @@ After many training iterations, the vectors become meaningful representations of
 
 ==============
 
+Step 8: Predict Target Word
+
+Using the average context vector, the model predicts the target.
+
+Prediction:
+
+fox
+
+If it predicts another word, the prediction is wrong.
+
+Step 9: Calculate Loss/Error
+
+Compare:
+
+Actual:
+
+fox
+
+Predicted:
+
+dog
+
+Since they are different,
+
+Loss = High
+
+The model now knows it made a mistake.
+
+Step 10: Backpropagation
+
+The error is sent backward through the neural network.
+
+The model learns which weights caused the wrong prediction.
+
+Step 11: Update Word Vectors
+
+The embedding vectors are adjusted.
+
+Before:
+
+fox = [0.32, 0.51, 0.29]
+
+After:
+
+fox = [0.35, 0.55, 0.33]
+
+These updates help improve future predictions.
+
+Step 12: Repeat for Epochs
+
+The same process is repeated many times.
+
+Epoch 1
+Epoch 2
+Epoch 3
+...
+Epoch 100
+
+Each epoch improves the embeddings.
+
+==============
+
+Final Output: Trained Word Vectors
+
+After training, each word has a meaningful vector.
+
+| Word  | Embedding          |
+| ----- | ------------------ |
+| The   | [0.15, 0.22, 0.81] |
+| quick | [0.42, 0.53, 0.21] |
+| brown | [0.45, 0.57, 0.20] |
+| fox   | [0.48, 0.60, 0.25] |
+
+
+Words used in similar contexts have similar vectors.
+
+===============
+
+| Step                    | What Happens               |
+| ----------------------- | -------------------------- |
+| Input Text              | Read sentences             |
+| Tokenization            | Split into words           |
+| Context–Target Pairs    | Create training examples   |
+| Encode as Indices       | Assign each word an ID     |
+| One-Hot Encoding        | Convert IDs to vectors     |
+| CBOW Model              | Use context words as input |
+| Average Context Vectors | Combine context embeddings |
+| Predict Target Word     | Guess the missing word     |
+| Calculate Loss          | Measure prediction error   |
+| Backpropagation         | Send error backward        |
+| Update Word Vectors     | Improve embeddings         |
+| Repeat for Epochs       | Train repeatedly           |
+| Trained Word Vectors    | Final learned embeddings   |
+
+
+==============
+
+| **Step** | **Process**                     | **Description**                                                                            | **Example**                                                               |
+| -------- | ------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| **1**    | **Input Text**                  | Provide the training sentence to the model.                                                | `The quick brown fox jumps over the lazy dog`                             |
+| **2**    | **Tokenization**                | Split the sentence into individual words (tokens).                                         | `["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]` |
+| **3**    | **Create Context–Target Pairs** | Select surrounding words (context) and the word to predict (target) using the window size. | Context: `quick, brown, jumps, over` → Target: `fox`                      |
+| **4**    | **Encode Words as Indices**     | Assign a unique integer (ID) to every word.                                                | `The=0, quick=1, brown=2, fox=3...`                                       |
+| **5**    | **One-Hot Encoding**            | Convert each word index into a one-hot vector.                                             | `quick → [0,1,0,0,0,0,0,0]`                                               |
+| **6**    | **CBOW Model**                  | Feed the context word vectors into the CBOW neural network.                                | Input: `quick, brown, jumps, over`                                        |
+| **7**    | **Average Context Vectors**     | Compute the average of all context word embedding vectors.                                 | `(quick + brown + jumps + over) ÷ 4`                                      |
+| **8**    | **Predict Target Word**         | Use the averaged vector to predict the missing target word.                                | Predicted Output: `fox`                                                   |
+| **9**    | **Calculate Loss/Error**        | Compare the predicted word with the actual target word and calculate the error.            | Actual: `fox`, Predicted: `dog` → Error                                   |
+| **10**   | **Backpropagation**             | Send the error backward through the network to learn from mistakes.                        | Update network weights                                                    |
+| **11**   | **Update Word Vectors**         | Adjust the embedding vectors to reduce prediction error.                                   | `fox: [0.32,0.51,0.29] → [0.35,0.55,0.33]`                                |
+| **12**   | **Repeat for Epochs**           | Repeat the training process many times until the model learns good embeddings.             | Epoch 1 → Epoch 2 → ... → Epoch 100                                       |
+| **13**   | **Trained Word Vectors**        | Final output is meaningful word embeddings where similar words have similar vectors.       | `love ≈ like`, `king - man + woman ≈ queen`                               |
+
+
+
+=============
 
 
 
