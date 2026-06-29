@@ -1,0 +1,239 @@
+In CBOW, the target word is predicted using the surrounding context words. 
+The window size determines how many words before and after the target are considered as context. 
+For example, with a window size of 2, the model uses two words before and two words after the target word to predict it.
+
+==========
+
+the three important terms in CBOW:
+
+Context Word
+Target Word
+Window Size
+
+============
+
+Let's use the sentence from the slide:
+
+The quick brown fox jumps over the lazy dog
+
+Step 1: Choose a Target Word
+
+Suppose the target word is:
+
+fox
+
+Sentence:
+
+The   quick   brown   fox   jumps   over   the   lazy   dog
+                    ↑
+              Target Word
+
+=========
+
+Step 2: Window Size = 2
+
+The slide says:
+
+Context Word: (-2, Target Word, +2)
+
+This means:
+
+Take 2 words before the target.
+Take 2 words after the target.
+
+For target word fox:
+
+The   quick   brown   fox   jumps   over   the   lazy   dog
+      ↑       ↑       ↑      ↑       ↑
+     -2      -1    Target   +1      +2
+Context Words
+quick
+brown
+jumps
+over
+Target Word
+fox
+
+So,
+
+| Window Size | Context Words             | Target Word |
+| ----------- | ------------------------- | ----------- |
+| 2           | quick, brown, jumps, over | fox         |
+
+============
+
+How CBOW Works
+
+CBOW uses the context words as input and predicts the target word.
+
+Input
+quick
+brown
+jumps
+over
+
+↓
+
+Output
+fox
+
+=============
+
+Another Example
+
+Sentence:
+
+I love machine learning every day
+
+Suppose the target word is:
+
+machine
+
+Window size = 2
+
+I   love   machine   learning   every   day
+↑     ↑       ↑         ↑         ↑
+-2   -1    Target      +1       +2
+Context Words
+I
+love
+learning
+every
+Target Word
+machine
+
+CBOW learns:
+
+Input : I, love, learning, every
+Output: machine
+
+========
+
+What does (-2, Target Word, +2) mean?
+
+It does not mean subtraction or addition.
+
+It indicates the position relative to the target word.
+
+| Position | Meaning                       |
+| -------- | ----------------------------- |
+| -2       | Second word before the target |
+| -1       | First word before the target  |
+| Target   | Current word to predict       |
+| +1       | First word after the target   |
+| +2       | Second word after the target  |
+
+
+==========
+
+Easy Way to Remember
+
+Suppose your sentence is:
+
+I love deep learning today
+
+Target word:
+
+deep
+
+Window size = 1
+
+I   love   deep   learning   today
+        ↑      ↑        ↑
+      Context Target Context
+
+Input (Context):
+
+love
+learning
+
+Output (Target):
+
+deep
+
+===============
+
+Window Size = 2
+
+Context Words = (-2, -1, +1, +2)
+               ↓
+           Predict Target Word
+
+Example:
+
+Sentence:
+The quick brown fox jumps over the lazy dog
+
+Context Words: quick, brown, jumps, over
+Target Word : fox
+
+================
+
+how do we get 1, 2, or 3?
+
+We don't calculate it from the sentence. We choose it.
+
+For example, in Python:
+
+from gensim.models import Word2Vec
+
+model = Word2Vec(
+    sentences,
+    vector_size=100,
+    window=2
+)
+
+Here:
+
+window = 2
+
+means:
+
+Look at 2 words before
+Look at 2 words after
+
+If you write:
+
+window=5
+
+then the model considers 5 words before and 5 words after the target word.
+
+
+=======
+
+Real-Life Analogy
+
+Imagine you are reading a sentence and want to understand the word fox.
+
+Window = 1
+
+You only look at the nearest neighbors.
+
+brown fox jumps
+Window = 2
+
+You look a little farther.
+
+quick brown fox jumps over
+Window = 3
+
+You look even farther.
+
+The quick brown fox jumps over the
+
+The larger the window, the more surrounding context the model uses.
+
+===========
+
+Window size is a user-defined hyperparameter in Word2Vec. 
+It specifies how many words before and after the target word are used as context.
+For example, if the window size is 2, the model uses two words before and two words after the target word as context. 
+It is chosen by the developer before training and is not calculated from the sentence.
+
+================
+
+
+
+
+
+
