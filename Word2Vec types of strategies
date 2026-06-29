@@ -1,0 +1,186 @@
+Word2Vec is a word embedding technique that learns meaningful vector representations of words.
+
+It uses two training strategies:
+
+CBOW (Continuous Bag of Words): Predicts the target word from the surrounding context words.
+Skip-Gram: Predicts the surrounding context words from a given target word.
+
+CBOW is faster and performs well for common words, while Skip-Gram is slower but learns better representations for rare words.
+
+================
+
+two training strategies used in Word2Vec to create word embeddings.
+
+Word2Vec
+
+Word2Vec is a technique that converts words into meaningful vectors (embeddings).
+
+It has two strategies:
+
+CBOW (Continuous Bag of Words)
+Skip-Gram
+1. Continuous Bag of Words (CBOW)
+Idea
+
+Given the surrounding (context) words, predict the missing (target) word.
+
+Example
+
+Sentence:
+
+I love to eat pizza
+
+Suppose the target word is eat.
+
+Input (context words):
+
+I   love   to   ____   pizza
+
+Output:
+
+eat
+Another Example
+
+Sentence:
+
+She is reading a book
+
+Input:
+
+She   is   ____   a   book
+
+Output:
+
+reading
+Real-world Analogy
+
+Your friend says:
+
+"I drink ___ every morning."
+
+You can easily guess:
+
+coffee
+
+
+
+because the surroundin
+g words provide enough context.
+
+Diagram
+-------
+
+Context Words
+(I, love, to, pizza)
+          │
+          ▼
+      Word2Vec (CBOW)
+          │
+          ▼
+Predict Target Word
+       "eat"
+
+
+====================
+
+2. Skip-Gram
+Idea
+
+Given one target word, predict the surrounding (context) words.
+
+Example
+
+Sentence:
+
+I love to eat pizza
+
+Target word:
+
+eat
+
+Output:
+
+love
+to
+pizza
+Another Example
+
+Sentence:
+
+She is reading a book
+
+Target:
+
+reading
+
+Output:
+
+is
+a
+book
+Real-world Analogy
+
+Someone says only:
+
+coffee
+
+You immediately think of related words like:
+
+drink
+morning
+tea
+cup
+
+One word helps predict its surrounding words.
+
+Diagram
+
+Target Word
+    eat
+     │
+     ▼
+ Word2Vec (Skip-Gram)
+     │
+     ▼
+love   to   pizza
+
+===========
+CBOW vs Skip-Gram
+-----------------
+
+| Feature        | CBOW                        | Skip-Gram                 |
+| -------------- | --------------------------- | ------------------------- |
+| Input          | Context words               | Target word               |
+| Output         | Target word                 | Context words             |
+| Goal           | Predict the missing word    | Predict surrounding words |
+| Training speed | Faster                      | Slower                    |
+| Works well for | Frequent words              | Rare words                |
+| Example        | "I love to ___ pizza" → eat | "eat" → love, to, pizza   |
+
+
+========
+
+imple way to remember
+CBOW
+
+Context ➜ Word
+
+(I, love, to, pizza)
+        ↓
+      Predict
+       "eat"
+Skip-Gram
+
+Word ➜ Context
+
+"eat"
+   ↓
+Predict
+love, to, pizza
+
+============
+
+
+
+
+
