@@ -1,0 +1,261 @@
+Deep Learning modules used in NLP
+
+Evolution of NLP + Deep Learning
+----------------------------------
+
+| Module             | Purpose                                                  | Real-time Example                        |
+| ------------------ | -------------------------------------------------------- | ---------------------------------------- |
+| **Word Embedding** | Convert words into meaningful vectors                    | Word2Vec, GloVe                          |
+| **LSTM**           | Remember previous words and context                      | Sentiment Analysis, Next Word Prediction |
+| **Seq2Seq**        | Convert one sequence to another                          | Language Translation, Chatbots           |
+| **Transformer**    | Understand full context efficiently using Self-Attention | ChatGPT, BERT, GPT, Google Translate     |
+
+============
+
+
+NLP + Deep Learning Modules
+---------------------------
+
+Text
+   ↓
+Word Embedding
+   ↓
+LSTM
+   ↓
+Sequence-to-Sequence (Seq2Seq)
+   ↓
+Transformer
+   ↓
+Prediction
+
+===============
+
+1. Word Embedding
+  ----------------
+
+What is it?
+
+Computers cannot understand words directly. They understand only numbers.
+
+Word Embedding converts every word into a vector (list of numbers) while preserving its meaning.
+
+Example
+
+Sentence:
+
+I love AI
+
+Without embedding:
+
+I     → 1
+love  → 2
+AI    → 3
+
+These numbers don't tell the computer that love is similar to like.
+
+With Word Embedding:
+
+love → [0.25, 0.91, 0.42]
+like → [0.27, 0.89, 0.40]
+hate → [0.85, 0.11, 0.73]
+
+Here,
+
+love and like have similar vectors.
+hate has a different vector.
+
+So the computer understands similarity between words.
+
+Real-time Example
+
+Google Search understands that
+
+Car ≈ Automobile
+
+even if the exact word isn't used.
+
+Popular Embeddings
+Word2Vec
+GloVe
+FastText
+
+
+==============
+
+2. LSTM (Long Short-Term Memory)
+   -----------------------------
+
+What is it?
+
+LSTM is a special type of Recurrent Neural Network (RNN) that remembers important information from earlier words in a sentence.
+
+Why is it needed?
+
+Sentence:
+
+I grew up in Chennai.
+Now I work in Bangalore.
+I miss my hometown.
+
+To understand "my hometown", the model should remember Chennai from the first sentence.
+
+A normal RNN often forgets long-term information.
+
+LSTM remembers it.
+
+Real-time Example
+
+Predicting the next word:
+
+I am going to
+
+↓
+
+school
+office
+market
+
+LSTM uses previous words to predict the next one.
+
+Applications
+Sentiment Analysis
+Spam Detection
+Text Classification
+Speech Recognition
+
+
+======================
+
+3. Sequence-to-Sequence (Seq2Seq)
+   -----------------------------
+
+
+What is it?
+
+Seq2Seq converts one sequence into another sequence.
+
+Input = Sequence
+
+↓
+
+Output = Another Sequence
+
+Example 1
+
+English
+
+How are you?
+
+↓
+
+Tamil
+
+நீங்கள் எப்படி இருக்கிறீர்கள்?
+Example 2
+
+Question
+
+What is AI?
+
+↓
+
+Answer
+
+Artificial Intelligence is...
+Architecture
+Input Sentence
+       ↓
+Encoder (LSTM)
+       ↓
+Context Vector
+       ↓
+Decoder (LSTM)
+       ↓
+Output Sentence
+
+Applications
+
+Machine Translation
+Chatbots
+Text Summarization
+Question Answering
+
+======================
+
+4. Transformer
+   ------------
+
+
+What is it?
+
+Transformer is the modern Deep Learning architecture for NLP.
+
+Instead of reading words one by one like LSTM, it processes all words in parallel using a mechanism called Self-Attention.
+
+Example
+
+Sentence:
+
+The boy who won the race is happy.
+
+The Transformer understands that "won" refers to "boy", even though other words are in between.
+
+Advantages
+
+Faster than LSTM
+Better at understanding context
+Handles long documents well
+Can be trained on huge datasets
+Popular Transformer Models
+BERT
+GPT
+T5
+RoBERTa
+BART
+Real-Time Example (ChatGPT)
+
+Suppose you ask:
+
+Explain Machine Learning.
+
+The process is:
+
+Your Question
+      ↓
+Word Embedding
+(Converts words into vectors)
+      ↓
+Transformer
+(Understands context using Self-Attention)
+      ↓
+Generates Response
+
+===================
+
+Word Embedding
+        ↓
+Converts words into numbers with meaning
+
+LSTM
+        ↓
+Remembers previous words
+
+Seq2Seq
+        ↓
+Converts one sentence into another
+
+Transformer
+        ↓
+Understands the whole sentence at once and generates accurate output
+
+===========
+
+Why did Transformers replace LSTMs in modern NLP?
+
+LSTMs process words one by one, making them slower and less effective for long sentences.
+
+Transformers process all words in parallel using Self-Attention, making them faster, more scalable, 
+and better at capturing long-range relationships. 
+
+This is why models like BERT, GPT, and ChatGPT are based on the Transformer architecture.
+
