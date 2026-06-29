@@ -1,0 +1,174 @@
+CBOW Workflow
+
+Input Text
+     ↓
+Tokenization
+     ↓
+Create Context–Target Pairs
+     ↓
+Encode Words as Indices
+     ↓
+One-Hot Encoding
+     ↓
+CBOW Model
+     ↓
+Average Context Vectors
+     ↓
+Predict Target Word
+     ↓
+Calculate Loss/Error
+     ↓
+Backpropagation
+     ↓
+Update Word Vectors
+     ↓
+Repeat for Epochs
+     ↓
+Trained Word Vectors
+
+
+===========
+
+Step 1: Input Text
+
+The model receives text.
+
+Example:
+
+The quick brown fox jumps over the lazy dog
+Step 2: Tokenization
+
+Split the sentence into individual words (tokens).
+
+["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+
+Each word is called a token.
+
+Step 3: Create Context–Target Pairs
+
+Suppose window size = 2.
+
+Sentence:
+
+The quick brown fox jumps over the lazy dog
+Pair 1
+
+Context:
+
+quick, brown, jumps, over
+
+Target:
+
+fox
+Pair 2
+
+Context:
+
+The, brown
+
+Target:
+
+quick
+
+Many such pairs are created from the sentence.
+
+Step 4: Encode Words as Indices
+
+Assign an integer ID to every word.
+
+| Word  | Index |
+| ----- | ----: |
+| The   |     0 |
+| quick |     1 |
+| brown |     2 |
+| fox   |     3 |
+| jumps |     4 |
+| over  |     5 |
+| lazy  |     6 |
+| dog   |     7 |
+
+Now the sentence becomes:
+
+0 1 2 3 4 5 0 6 7
+
+=============
+
+Step 5: One-Hot Encoding
+
+Convert each index into a one-hot vector.
+
+Example:
+
+| Word  | One-Hot Vector    |
+| ----- | ----------------- |
+| The   | [1 0 0 0 0 0 0 0] |
+| quick | [0 1 0 0 0 0 0 0] |
+| brown | [0 0 1 0 0 0 0 0] |
+
+
+These vectors contain mostly zeros and a single one.
+
+==============
+
+Step 6: CBOW Model
+
+The model takes the context words as input.
+
+Example:
+
+Input:
+quick
+brown
+jumps
+over
+
+Target:
+
+fox
+
+The CBOW neural network tries to predict fox.
+
+===============
+
+Step 7: Average Context Vectors
+
+Each context word has an embedding vector.
+
+Suppose:
+
+quick = [0.2, 0.4, 0.6]
+brown = [0.3, 0.5, 0.4]
+jumps = [0.7, 0.2, 0.5]
+over  = [0.4, 0.6, 0.8]
+
+The CBOW model averages them.
+
+Average:
+
+[(0.2+0.3+0.7+0.4)/4,
+ (0.4+0.5+0.2+0.6)/4,
+ (0.6+0.4+0.5+0.8)/4]
+
+=
+[0.40, 0.425, 0.575]
+
+This average vector represents the context.
+
+=============
+
+The values in a word embedding, such as 0.2, 0.4, and 0.6, are not manually calculated. 
+They are initially assigned random values. During Word2Vec training, the neural network predicts target words, 
+computes the prediction error, and updates these values using backpropagation and gradient descent.
+After many training iterations, the vectors become meaningful representations of the words.
+
+==============
+
+
+
+
+
+
+
+
+
+
