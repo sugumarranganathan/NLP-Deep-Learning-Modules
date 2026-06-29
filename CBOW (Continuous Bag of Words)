@@ -232,7 +232,34 @@ It is chosen by the developer before training and is not calculated from the sen
 
 ================
 
+Target Word = "quick"
+The   quick   brown   fox
+      ↑
+   Target
 
+Context:
+
+| Position | Word  |
+| -------- | ----- |
+| -2       | N/A   |
+| -1       | The   |
+| +1       | brown |
+| +2       | fox   |
+
+
+Input:
+
+N/A, The, brown, fox
+
+Output:
+
+quick
+
+=====
+
+N/A stands for "Not Available." In CBOW, 
+it is used when the target word is at the beginning or end of a sentence 
+and there are not enough surrounding context words according to the chosen window size.
 
 
 
