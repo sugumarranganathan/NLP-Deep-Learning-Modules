@@ -1,0 +1,290 @@
+LSTM Workflow
+
+Current Word
+      │
+      ▼
+Forget Gate
+(Remove unwanted information)
+      │
+      ▼
+Input Gate
+(Add important information)
+      │
+      ▼
+Update Cell State
+(Long-Term Memory)
+      │
+      ▼
+Output Gate
+      │
+      ▼
+Prediction
+
+=========
+
+| **Topic**          | **Description**                                                                                                      |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **Full Form**      | Long Short-Term Memory (LSTM)                                                                                        |
+| **Definition**     | LSTM is a special type of Recurrent Neural Network (RNN) designed to remember information for a long period of time. |
+| **Purpose**        | To solve the **Vanishing Gradient Problem** found in traditional RNNs.                                               |
+| **Memory**         | Uses a **Cell State** to store long-term information.                                                                |
+| **Key Components** | Forget Gate, Input Gate, Cell State, Output Gate.                                                                    |
+| **Applications**   | Machine Translation, Text Generation, Speech Recognition, Sentiment Analysis, Time Series Forecasting.               |
+
+
+==============
+
+Why LSTM is Needed?
+
+| **RNN**                                  | **LSTM**                                         |
+| ---------------------------------------- | ------------------------------------------------ |
+| Remembers only recent information.       | Remembers both recent and long-term information. |
+| Suffers from vanishing gradient.         | Solves the vanishing gradient problem.           |
+| Performance decreases on long sequences. | Performs well on long sequences.                 |
+
+
+===========
+
+LSTM Architecture
+
+        Previous Hidden State (ht-1)
+                 │
+                 ▼
+        ┌─────────────────────┐
+        │      Forget Gate    │
+        └─────────────────────┘
+                 │
+                 ▼
+        ┌─────────────────────┐
+Input → │      Input Gate     │
+ (xt)   └─────────────────────┘
+                 │
+                 ▼
+        ┌─────────────────────┐
+        │      Cell State      │
+        └─────────────────────┘
+                 │
+                 ▼
+        ┌─────────────────────┐
+        │     Output Gate     │
+        └─────────────────────┘
+                 │
+                 ▼
+      Output (ht) & New Cell State (Ct)
+
+=========
+
+Main Components of LSTM
+
+| **Component**           | **Purpose**                                         |
+| ----------------------- | --------------------------------------------------- |
+| **Input (Xt)**          | Current input word or value.                        |
+| **Hidden State (Ht-1)** | Information from the previous time step.            |
+| **Cell State (Ct)**     | Long-term memory carried through the sequence.      |
+| **Forget Gate**         | Decides what old information to remove from memory. |
+| **Input Gate**          | Decides what new information to store.              |
+| **Output Gate**         | Decides what information to send as the output.     |
+
+
+===========
+
+Step-by-Step Workflow
+
+| **Step** | **Operation**                                   |
+| -------- | ----------------------------------------------- |
+| 1        | Receive current input (`Xt`).                   |
+| 2        | Receive previous hidden state (`Ht-1`).         |
+| 3        | Forget Gate removes unnecessary information.    |
+| 4        | Input Gate stores important new information.    |
+| 5        | Update the Cell State.                          |
+| 6        | Output Gate produces the current output (`Ht`). |
+
+===========
+
+Forget Gate
+Purpose
+
+Removes unnecessary information.
+
+Formula
+
+ft = σ(Wf × [Ht-1, Xt] + bf)
+
+Example
+
+Sentence:
+I went to the bank to deposit money.
+
+Forget Gate remembers that
+"bank" means a financial institution,
+not a river bank.
+Input Gate
+Purpose
+
+Stores new useful information.
+
+Formula
+
+it = σ(Wi × [Ht-1, Xt] + bi)
+
+Example
+
+Current word:
+money
+
+Input Gate stores
+"money" as an important word.
+Cell State
+Purpose
+
+Stores long-term memory.
+
+Formula
+
+Ct = ft × Ct-1 + it × C̃t
+
+Example
+
+Previous Memory
+↓
+
+Bank
+Money
+Deposit
+
+↓
+
+Updated Memory
+
+Bank
+Money
+Deposit
+Loan
+Output Gate
+Purpose
+
+Produces the final output.
+
+Formula
+
+Ot = σ(Wo × [Ht-1, Xt] + bo)
+
+Ht = Ot × tanh(Ct)
+LSTM Workflow
+Current Word
+      │
+      ▼
+Forget Gate
+(Remove unwanted information)
+      │
+      ▼
+Input Gate
+(Add important information)
+      │
+      ▼
+Update Cell State
+(Long-Term Memory)
+      │
+      ▼
+Output Gate
+      │
+      ▼
+Prediction
+Example
+
+Sentence
+
+I love learning Artificial Intelligence
+
+
+| **Word**     | **What LSTM Does**                                                                          |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| I            | Stores subject information.                                                                 |
+| love         | Stores the relationship with the subject.                                                   |
+| learning     | Continues updating the memory.                                                              |
+| Artificial   | Recognizes it as part of a phrase.                                                          |
+| Intelligence | Combines with "Artificial" to understand **Artificial Intelligence** as a complete concept. |
+
+
+============
+
+LSTM for English → Tamil Translation
+------------------------------------
+
+English Sentence
+
+I love Tamil
+
+        │
+        ▼
+
+Word Embedding
+
+        │
+        ▼
+
+Encoder LSTM
+
+(Remembers complete sentence)
+
+        │
+        ▼
+
+Context Vector
+
+        │
+        ▼
+
+Decoder LSTM
+
+        │
+        ▼
+
+Tamil Sentence
+
+நான் தமிழை நேசிக்கிறேன்
+
+============
+
+Advantages
+
+| **Advantage**             | **Description**                                                     |
+| ------------------------- | ------------------------------------------------------------------- |
+| Long-Term Memory          | Remembers information over long sequences.                          |
+| Better Accuracy           | More accurate than a standard RNN on sequence tasks.                |
+| Solves Vanishing Gradient | Maintains useful gradients during training.                         |
+| Suitable for NLP          | Excellent for translation, sentiment analysis, and text generation. |
+
+==========
+
+Disadvantages
+
+| **Disadvantage**     | **Description**                                              |
+| -------------------- | ------------------------------------------------------------ |
+| Complex Architecture | Uses multiple gates, making it more complex than RNN.        |
+| Slower Training      | More computations per time step than a standard RNN.         |
+| Higher Memory Usage  | Requires more memory due to additional gates and cell state. |
+
+===========
+
+RNN vs LSTM
+
+| **Feature**          | **RNN**    | **LSTM**              |
+| -------------------- | ---------- | --------------------- |
+| Memory               | Short-term | Long-term             |
+| Vanishing Gradient   | Yes        | No (greatly reduced)  |
+| Long Sequences       | Poor       | Excellent             |
+| Gates                | No         | Forget, Input, Output |
+| Translation Accuracy | Moderate   | High                  |
+
+
+=============
+
+STM (Long Short-Term Memory) is a special type of Recurrent Neural Network (RNN) designed to process sequential data 
+while remembering important information over long periods. It uses three gates—Forget Gate, 
+Input Gate, and Output Gate—along with a Cell State to control what information is removed, stored, and passed to the next step.
+This design helps overcome the vanishing gradient problem of traditional RNNs, making LSTM highly effective for applications 
+such as language translation, speech recognition, sentiment analysis, and time-series forecasting.
+
+============
+
