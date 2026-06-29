@@ -1,0 +1,76 @@
+| Feature           | CBOW                    | Skip-Gram                                |
+| ----------------- | ----------------------- | ---------------------------------------- |
+| Full Form         | Continuous Bag of Words | Skip-Gram                                |
+| Input             | Context Words           | Target Word                              |
+| Output            | Target Word             | Context Words                            |
+| Number of Inputs  | Multiple                | One                                      |
+| Number of Outputs | One                     | Multiple                                 |
+| Training Speed    | Faster                  | Slower                                   |
+| Best For          | Frequent words          | Rare words                               |
+| Accuracy          | Good                    | Better for small datasets and rare words |
+
+
+===========
+
+Real-Life Analogy
+CBOW
+I ____ pizza
+
+Using the surrounding words:
+
+I
+pizza
+
+Predict:
+
+love
+Skip-Gram
+
+Given only:
+
+love
+
+Predict the surrounding words:
+
+I
+pizza
+
+=============
+
+Skip-Gram is a Word2Vec model that uses a target word as input and predicts the surrounding context words
+within a specified window size. It creates multiple target–context training pairs, learns word 
+embeddings using a neural network, and is particularly effective at learning representations for rare words.
+
+=================
+
+CBOW
+Context Words
+      ↓
+Predict Target Word
+
+Example:
+
+Input : quick, brown, jumps, over
+Output: fox
+Skip-Gram
+Target Word
+      ↓
+Predict Context Words
+
+Example:
+
+Input : fox
+Output: quick, brown, jumps, over
+
+================
+
+
+CBOW = Many → One (Many context words predict one target word)
+Skip-Gram = One → Many (One target word predicts many context words)
+
+
+
+
+
+
+
