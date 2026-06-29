@@ -1,0 +1,145 @@
+Context Word 1      Context Word 2       ...      Context Word C
+     │                    │
+     ▼                    ▼
+ Input Layer         Input Layer
+     │                    │
+     └──────────► Hidden Layer ◄──────────┘
+                      │
+                      ▼
+                Output Layer
+                      │
+                      ▼
+              Predicted Target Word
+
+
+========
+
+How Data Flows
+
+Context Words
+      │
+      ▼
+One-Hot Encoding
+      │
+      ▼
+Embedding Matrix (W)
+      │
+      ▼
+Average Vectors
+      │
+      ▼
+Hidden Layer
+      │
+      ▼
+Output Weight Matrix (W')
+      │
+      ▼
+Predict Target Word
+
+==================
+
+Components
+
+| Symbol                 | Meaning                                | Simple Explanation                                                                                     |
+| ---------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **x₁k, x₂k, ..., xck** | Input Context Words                    | Context words given as input to predict the target word.                                               |
+| **Input Layer**        | One-hot encoded context words          | Each context word is converted into a one-hot vector.                                                  |
+| **W (V × N)**          | Input Weight Matrix (Embedding Matrix) | Converts one-hot vectors into dense embedding vectors. These are the word embeddings that are learned. |
+| **Hidden Layer (h)**   | Average of context embeddings          | CBOW averages all context word vectors into a single vector.                                           |
+| **W' (N × V)**         | Output Weight Matrix                   | Maps the hidden vector back to the vocabulary.                                                         |
+| **Output Layer (y)**   | Predicted Target Word                  | Produces probabilities for all words and predicts the most likely target word.                         |
+
+=======
+
+Example
+
+Sentence:
+
+The quick brown fox jumps over the lazy dog
+
+Window Size = 2
+
+Target Word:
+
+fox
+
+Context Words:
+
+quick
+brown
+jumps
+over
+Step 1: Input Layer
+quick
+brown
+jumps
+over
+
+↓
+
+Step 2: Embedding Matrix (W)
+
+Each word gets an embedding vector.
+
+quick → [0.2, 0.4, 0.6]
+
+brown → [0.3, 0.5, 0.4]
+
+jumps → [0.7, 0.2, 0.5]
+
+over  → [0.4, 0.6, 0.8]
+
+↓
+
+Step 3: Hidden Layer
+
+Average all four vectors.
+
+Average =
+([0.2,0.4,0.6] +
+ [0.3,0.5,0.4] +
+ [0.7,0.2,0.5] +
+ [0.4,0.6,0.8]) / 4
+
+=
+[0.40, 0.425, 0.575]
+
+↓
+
+Step 4: Output Layer
+
+The hidden vector is compared with every word in the vocabulary.
+
+The      → 0.01
+
+quick    → 0.02
+
+brown    → 0.03
+
+fox      → 0.94  ✅
+
+dog      → 0.01
+
+The highest probability is fox, so the prediction is correct.
+
+=========
+
+Meaning of Symbols
+
+
+| Symbol | Meaning                                                                     |
+| ------ | --------------------------------------------------------------------------- |
+| **V**  | Vocabulary Size (total number of unique words)                              |
+| **N**  | Embedding Size (number of dimensions in each word vector, e.g., 100 or 300) |
+| **C**  | Number of Context Words (depends on the window size)                        |
+| **h**  | Hidden Layer (average context vector)                                       |
+| **y**  | Output (predicted target word probabilities)                                |
+
+
+
+
+
+
+
+
+
