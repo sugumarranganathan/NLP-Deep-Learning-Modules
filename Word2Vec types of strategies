@@ -1,3 +1,6 @@
+Context = The surrounding words or information that help explain the meaning of a word.
+========================================================================================
+
 Word2Vec is a word embedding technique that learns meaningful vector representations of words.
 
 It uses two training strategies:
