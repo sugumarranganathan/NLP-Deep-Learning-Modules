@@ -1,0 +1,201 @@
+Relationship between NLP, Deep Learning, and Generative AI
+
+| **Technology**      | **Purpose**                      | **Output**                                            |
+| ------------------- | -------------------------------- | ----------------------------------------------------- |
+| NLP                 | Understand human language        | Classification, translation, sentiment, etc.          |
+| Deep Learning       | Learn complex patterns from data | Predictions or generated content                      |
+| NLP + Deep Learning | Learn language patterns          | Translation, summarization, chatbots, text generation |
+| Generative AI       | Generate new content             | Text, images, audio, video, code                      |
+
+
+==========
+
+Why is NLP + Deep Learning called Generative AI?
+
+Because deep learning models can generate new text instead of only classifying existing text.
+
+Traditional NLP
+Input:
+"I love this movie."
+
+↓
+
+Output:
+Positive Sentiment
+
+The model classifies the sentence.
+
+
+==========
+
+Generative AI
+Input:
+Write a story about a robot.
+
+↓
+
+Output:
+Once upon a time, a robot named Alex...
+
+The model creates new text.
+
+============
+
+
+Example
+NLP + Machine Learning
+Email
+
+↓
+
+Spam or Not Spam
+
+Output:
+
+Spam
+
+Only classification.
+
+NLP + Deep Learning (Generative AI)
+Question:
+
+Explain Artificial Intelligence.
+
+↓
+
+Output:
+
+Artificial Intelligence is a branch of computer science...
+
+The answer is generated, not selected from a fixed list.
+
+============
+
+Workflow
+
+Text Data
+      │
+      ▼
+Natural Language Processing
+(Tokenization, Cleaning, Embedding)
+      │
+      ▼
+Deep Learning Model
+(LSTM / Transformer / GPT)
+      │
+      ▼
+Learns Language Patterns
+      │
+      ▼
+Generates New Text
+      │
+      ▼
+Generative AI
+
+=========
+
+Why Word2Vec + LSTM belongs to Generative AI
+
+In your English → Tamil project:
+
+English Sentence
+
+↓
+
+Word Embedding
+(Word2Vec)
+
+↓
+
+LSTM
+
+↓
+
+Tamil Sentence
+
+========
+
+The model generates a new Tamil sentence that was not simply copied from the dataset.
+
+Example:
+
+Input
+
+How are you?
+
+↓
+
+Generated Output
+
+நீங்கள் எப்படி இருக்கிறீர்கள்?
+
+==========
+
+# Why is it called Generative AI?
+
+A system is called **Generative AI** when it creates **new content** such as text, images, audio, videos,
+or code instead of only analyzing or classifying existing data.
+
+For example, in an **English-to-Tamil Translation** project:
+
+```
+English Sentence
+        │
+        ▼
+Word Embedding (Word2Vec)
+        │
+        ▼
+LSTM / Transformer
+        │
+        ▼
+Generated Tamil Sentence
+```
+
+The model does not simply retrieve a stored translation. Instead, it generates the Tamil sentence based on the patterns it learned during training. Since it creates a new sentence, this is called a **generative task**.
+
+---
+
+# Examples of Generative AI
+
+| Input                   | Generated Output     |
+| ----------------------- | -------------------- |
+| Write a poem.           | A new poem           |
+| Translate to Tamil.     | A new Tamil sentence |
+| Summarize this article. | A new summary        |
+| Write Python code.      | New Python code      |
+| Draw a cat.             | A new image          |
+
+---
+
+# Difference Between AI, ML, DL, NLP, and GenAI
+
+| Technology                        | Main Purpose                                                       | Example                           |
+| --------------------------------- | ------------------------------------------------------------------ | --------------------------------- |
+| Artificial Intelligence (AI)      | Makes machines perform intelligent tasks.                          | Chess-playing program             |
+| Machine Learning (ML)             | Learns patterns from data.                                         | Spam email detection              |
+| Deep Learning (DL)                | Learns complex patterns using neural networks.                     | Image recognition                 |
+| Natural Language Processing (NLP) | Enables computers to understand and process human language.        | Sentiment analysis                |
+| Generative AI (GenAI)             | Generates new content such as text, images, audio, video, or code. | ChatGPT, Gemini, image generators |
+
+---
+
+
+
+**Generative AI is not simply NLP plus Deep Learning. 
+NLP provides techniques to process human language, while Deep Learning provides neural network models that learn patterns from data. 
+When these deep learning models are trained to generate new content—such as text, translations, summaries, images, or code—they are called Generative AI models. 
+For example, ChatGPT uses NLP with a Transformer-based deep learning model to generate new text, which is why it is considered a Generative AI system.**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
