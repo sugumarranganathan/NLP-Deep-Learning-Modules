@@ -1,0 +1,469 @@
+LSTM Architecture
+------------------
+
+Previous Cell State
+      c(t−1)
+         │
+         ▼
+    Forget Gate
+         │
+         ▼
+Element-wise ×
+         │
+         ▼
+Input Gate + tanh
+         │
+         ▼
+Element-wise ×
+         │
+         ▼
+Element-wise +
+         │
+         ▼
+Current Cell State
+      c(t)
+         │
+         ▼
+      tanh
+         │
+         ▼
+Output Gate
+         │
+         ▼
+Element-wise ×
+         │
+         ▼
+Hidden State
+      h(t)
+
+
+=============
+
+Components in the Diagram
+-------------------------
+
+| Symbol     | Meaning                                   |
+| ---------- | ----------------------------------------- |
+| **x(t)**   | Current input word                        |
+| **h(t−1)** | Previous hidden state (short-term memory) |
+| **c(t−1)** | Previous cell state (long-term memory)    |
+| **σ**      | Sigmoid activation (0 to 1)               |
+| **tanh**   | Hyperbolic tangent (-1 to +1)             |
+| **×**      | Element-wise multiplication               |
+| **+**      | Element-wise addition                     |
+| **c(t)**   | Updated cell state                        |
+| **h(t)**   | New hidden state                          |
+
+
+-------------
+
+Step 1: Inputs
+
+At time t, the LSTM receives:
+
+Previous Hidden State
+
+h(t−1)
+
+Previous Cell State
+
+c(t−1)
+
+Current Word
+
+x(t)
+
+Suppose
+
+Previous Memory
+
+France
+
+Current word
+
+fluent
+Step 2: Forget Gate
+
+Formula
+
+f
+t
+	​
+
+=σ(W
+f
+	​
+
+[h
+t−1
+	​
+
+,x
+t
+	​
+
+]+b
+f
+	​
+
+)
+
+Purpose
+
+Decides what to forget.
+
+Suppose
+
+Memory
+
+France
+
+Forget gate output
+
+0.95
+
+Meaning
+
+Keep 95% of France.
+Forget only 5%.
+
+This is why the previous cell state passes through the × operation.
+
+Step 3: Input Gate
+
+Formula
+
+i
+t
+	​
+
+=σ(W
+i
+	​
+
+[h
+t−1
+	​
+
+,x
+t
+	​
+
+]+b
+i
+	​
+
+)
+
+Purpose
+
+Decides how much new information should enter memory.
+
+Suppose
+
+Current word
+
+fluent
+
+Sigmoid output
+
+0.40
+
+Meaning
+
+Store only 40% of this new information.
+Step 4: Candidate Memory (tanh)
+
+Formula
+
+C
+t
+	​
+
+~
+	​
+
+=tanh(W
+c
+	​
+
+[h
+t−1
+	​
+
+,x
+t
+	​
+
+]+b
+c
+	​
+
+)
+
+Purpose
+
+Creates new candidate memory.
+
+Suppose tanh produces
+
+0.90
+
+Meaning
+
+This information is useful.
+Step 5: Update Cell State
+
+Formula
+
+C
+t
+	​
+
+=f
+t
+	​
+
+×C
+t−1
+	​
+
++i
+t
+	​
+
+×
+C
+t
+	​
+
+~
+	​
+
+
+This is the + symbol in the diagram.
+
+Example
+
+Previous memory
+
+France
+
+Forget gate
+
+0.95
+
+Candidate memory
+
+0.90
+
+Input gate
+
+0.40
+
+Calculation
+
+New Cell State
+
+= (0.95 × France)
+
++
+
+(0.40 × 0.90)
+
+So
+
+France
+
+is still strongly stored.
+Step 6: Output Gate
+
+Formula
+
+o
+t
+	​
+
+=σ(W
+o
+	​
+
+[h
+t−1
+	​
+
+,x
+t
+	​
+
+]+b
+o
+	​
+
+)
+
+Suppose
+
+Output Gate
+
+0.98
+
+Meaning
+
+Show almost all stored memory.
+Step 7: Hidden State
+
+Formula
+
+h
+t
+	​
+
+=o
+t
+	​
+
+×tanh(C
+t
+	​
+
+)
+
+Cell state first goes through tanh.
+
+Suppose
+
+tanh(Cell State)
+
+0.97
+
+Output gate
+
+0.98
+
+Hidden state
+
+0.98 × 0.97
+
+≈0.95
+
+============
+
+
+This hidden state is sent to:
+
+Next LSTM cell
+
+Final prediction layer
+
+-----
+
+Complete Flow
+-------------
+
+Input
+
+x(t)
+
+↓
+
+Forget Gate (σ)
+
+↓
+
+Keep useful memory
+
+↓
+
+Input Gate (σ)
+
+↓
+
+Candidate Memory (tanh)
+
+↓
+
+Update Cell State (+)
+
+↓
+
+Current Cell State
+
+↓
+
+tanh
+
+↓
+
+Output Gate (σ)
+
+↓
+
+Hidden State
+
+↓
+
+Next Time Step
+
+=========
+
+Example Using the Sentence
+
+Sentence:
+
+I grew up in France.
+
+I speak fluent _____
+
+| Step            | Operation                | Result                       |
+| --------------- | ------------------------ | ---------------------------- |
+| Previous Memory | France                   | Stored in c(t−1)             |
+| Forget Gate     | σ = 0.98                 | Keep France                  |
+| Input Gate      | σ = 0.20                 | Little new information added |
+| tanh            | Creates candidate memory | Small update                 |
+| Cell State      | Updated                  | France still remembered      |
+| Output Gate     | σ = 0.99                 | Use almost all memory        |
+| Prediction      | French                   | ✅ Correct                    |
+
+
+Meaning of Symbols in the Diagram
+
+| Symbol          | Meaning                                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **σ (Sigmoid)** | Controls information flow (0 = block, 1 = allow). Used in Forget, Input, and Output Gates.                               |
+| **tanh**        | Creates and scales memory values between **−1 and +1**. Used for candidate memory and before producing the hidden state. |
+| **×**           | Element-wise multiplication. Filters information according to the gate values.                                           |
+| **+**           | Element-wise addition. Combines retained old memory with new candidate memory.                                           |
+
+
+==========
+
+Forget Gate (σ)
+        ↓
+Remove unnecessary memory
+
+Input Gate (σ)
+        ↓
+Decide how much new information to store
+
+tanh
+        ↓
+Generate the new memory content
+
+Cell State (+)
+        ↓
+Long-term memory
+
+Output Gate (σ)
+        ↓
+Decide how much memory to reveal
+
+Hidden State h(t)
+        ↓
+Prediction / Next LSTM Cell
+
+
+===========
+
+
+
