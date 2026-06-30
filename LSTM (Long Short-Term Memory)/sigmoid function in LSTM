@@ -1,0 +1,245 @@
+Why LSTM Uses Sigmoid
+
+LSTM has three gates.
+
+Each gate asks a simple question:
+
+"Should I allow this information?"
+
+Sigmoid answers this with a value between 0 and 1.
+
+========
+
+The sigmoid function is one of the most important activation functions in an LSTM (Long Short-Term Memory) network. It is used in all three gates:
+
+Forget Gate
+Input Gate
+Output Gate
+
+The sigmoid function decides how much information should pass through a gate.
+
+Sigmoid Function
+Formula
+
+σ(x)=
+1/1+e power of -x
+	​
+
+Output Range
+0  -------------------------> 1
+
+The output is always between 0 and 1.
+
+0 → Completely block the information
+1 → Completely allow the information
+0.5 → Allow about half the information
+
+==========
+
+Why LSTM Uses Sigmoid
+
+LSTM has three gates.
+
+Each gate asks a simple question:
+
+"Should I allow this information?"
+
+Sigmoid answers this with a value between 0 and 1.
+
+1. Forget Gate
+
+Purpose:
+
+Decides what information to remove from memory.
+
+Example:
+
+Current memory:
+
+France
+
+Suppose new information arrives:
+
+I moved to Germany.
+
+Forget Gate output:
+
+Sigmoid = 0.2
+
+Meaning:
+
+Forget 80%
+Keep only 20%
+
+If
+
+Sigmoid = 1
+
+Keep everything.
+
+If
+
+Sigmoid = 0
+
+Forget everything.
+
+2. Input Gate
+
+Purpose:
+
+Decides how much new information should be stored.
+
+Example:
+
+New word:
+
+Germany
+
+Sigmoid output:
+
+0.9
+
+Meaning:
+
+Store almost all information.
+
+If output is
+
+0.1
+
+Store very little.
+
+3. Output Gate
+
+Purpose:
+
+Decides how much memory should be used as the output.
+
+Suppose memory contains:
+
+France
+Germany
+English
+
+Output gate:
+
+Sigmoid = 0.8
+
+Meaning:
+
+Use most of the stored memory.
+Example
+
+Sentence:
+
+I grew up in France.
+I speak fluent ______
+
+Memory contains:
+
+France
+Forget Gate
+Sigmoid = 1
+
+Keep France.
+
+Input Gate
+
+Current word:
+
+fluent
+
+Sigmoid:
+
+0.3
+
+Store only a little.
+
+Output Gate
+
+Need prediction.
+
+Sigmoid:
+
+0.95
+
+Use almost all stored memory.
+
+Prediction:
+
+French
+How Sigmoid Works
+
+Suppose the input value is:
+
+x = -5
+
+Output:
+
+0.0067
+
+Almost zero.
+
+Very little information passes.
+
+Suppose
+
+x = 0
+
+Output:
+
+0.5
+
+Half the information passes.
+
+Suppose
+
+x = 5
+
+Output:
+
+0.993
+
+Almost all information passes.
+
+Table
+Input (x)	Sigmoid Output	Meaning
+-5	0.0067	Almost block all information
+-2	0.119	Allow a little information
+0	0.500	Allow half the information
+2	0.881	Allow most information
+5	0.993	Allow almost all information
+
+
+Sigmoid Graph (Concept)
+Output
+1.0 |                         ●
+    |                      ●
+0.8 |                   ●
+    |                ●
+0.6 |             ●
+0.5 |-----------●----------------
+0.4 |         ●
+0.2 |      ●
+0.0 |●_______________________________
+      -5   -2   0   2   5
+              Input (x)
+
+
+Role of Sigmoid in LSTM
+
+| Gate        | Uses Sigmoid? | Purpose                                |
+| ----------- | ------------- | -------------------------------------- |
+| Forget Gate | ✅             | Decide what to forget from memory      |
+| Input Gate  | ✅             | Decide what new information to store   |
+| Output Gate | ✅             | Decide what memory to expose as output |
+
+
+===
+
+Sigmoid acts like a smart valve in an LSTM. It produces values between 0 and 1, allowing each gate to decide 
+how much information to keep, forget, or output. This controlled flow of information is one of the reasons LSTMs can learn long-term dependencies 
+much better than standard RNNs.
+
+====
+
