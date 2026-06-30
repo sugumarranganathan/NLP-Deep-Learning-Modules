@@ -486,3 +486,66 @@ Expected Output: French
 | **11**   | **Prediction**                      | -                                         | Hidden state is used to predict the next word.                                   | "I speak fluent ____"                                   | **French** ✅                         |
 
 =========
+
+                            Long Short-Term Memory (LSTM)
+
+ Previous Cell State
+      c(t-1)
+         │
+         │
+         ▼
+      ( × ) <---------------- Forget Gate (σ)
+         │                           ▲
+         │                           │
+         │                      h(t-1), x(t)
+         │
+         ├──────────────────────────────────────────────┐
+         │                                              │
+         ▼                                              │
+      (  +  ) <──────── ( × ) ───────── tanh ───────────┘
+         │                 ▲               ▲
+         │                 │               │
+         │          Input Gate (σ)    Candidate Memory
+         │                 ▲
+         │                 │
+         │            h(t-1), x(t)
+         │
+         ▼
+      Cell State
+        c(t)
+         │
+         ▼
+       tanh
+         │
+         ▼
+      ( × ) <──────── Output Gate (σ)
+         ▲                 ▲
+         │                 │
+         │            h(t-1), x(t)
+         │
+         ▼
+      Hidden State
+        h(t)
+
+Current Input:
+   x(t)
+
+
+===================
+Symbols Used
+-------------
+
+
+σ      = Sigmoid Activation (0 to 1)
+
+tanh   = Hyperbolic Tangent (-1 to +1)
+
+×      = Element-wise Multiplication
+
++      = Element-wise Addition
+
+c(t)   = Cell State (Long-Term Memory)
+
+h(t)   = Hidden State (Short-Term Memory)
+
+x(t)   = Current Input
