@@ -1,0 +1,96 @@
+| Feature                      | Sigmoid                                | tanh                                                      |
+| ---------------------------- | -------------------------------------- | --------------------------------------------------------- |
+| Formula                      | (1/(1+e^{-x}))                         | ((e^x-e^{-x})/(e^x+e^{-x}))                               |
+| Output Range                 | 0 to 1                                 | -1 to +1                                                  |
+| Used In                      | Forget, Input, Output Gates            | Candidate Cell State and Final Hidden State               |
+| Purpose                      | Decide **how much** information passes | Create and update memory with positive or negative values |
+| Can produce negative values? | ❌ No                                   | ✅ Yes                                                     |
+
+
+========
+
+Sigmoid = Gatekeeper → Decides "How much information should pass?" (0 = block, 1 = allow).
+tanh = Memory creator → Generates the content to store in memory, with values between −1 and +1, allowing both positive and negative representations.
+
+========
+
+Why does LSTM use both Sigmoid and tanh?
+
+anh (Hyperbolic Tangent) activation function used in LSTM
+
+| Activation Function | Output Range | Used For                                                                                |
+| ------------------- | ------------ | --------------------------------------------------------------------------------------- |
+| **Sigmoid**         | **0 to 1**   | Decides **how much information** should pass through the gates (Forget, Input, Output). |
+| **tanh**            | **-1 to +1** | Creates and updates the **memory (cell state)** with positive and negative values.      |
+
+
+========
+
+| x  | tanh(x)      |
+| -- | ------------ |
+| -5 | -0.9999 ≈ -1 |
+| -2 | -0.964       |
+| -1 | -0.761       |
+| 0  | 0            |
+| 1  | 0.761        |
+| 2  | 0.964        |
+| 5  | 0.9999 ≈ 1   |
+
+
+---
+
+Graph
+Output
+
+ +1 |                     ●
+    |                  ●
+0.5 |               ●
+    |            ●
+ 0  |---------●-------------
+    |      ●
+-0.5|   ●
+    | ●
+ -1 |●_________________________
+     -5  -2  0  2  5
+            Input
+
+----
+
+Why tanh Instead of Sigmoid?
+
+Suppose we want to represent sentiment.
+
+Sentence:
+
+I love this movie.
+
+Desired memory:
+
++1
+
+Sentence:
+
+I hate this movie.
+
+Desired memory:
+
+-1
+
+Sigmoid cannot represent negative values because its range is 0 to 1.
+
+Example:
+
+love  → 0.95
+hate  → 0.12
+
+Both are positive values.
+
+However, tanh can naturally represent opposite meanings:
+
+love  → +0.95
+hate  → -0.95
+
+This makes tanh better for storing information where the direction (positive or negative) matters.
+
+========
+
