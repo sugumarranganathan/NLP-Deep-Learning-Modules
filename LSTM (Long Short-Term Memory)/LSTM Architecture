@@ -464,6 +464,25 @@ Prediction / Next LSTM Cell
 
 
 ===========
+LSTM Architecture Workflow
+-----------------------------
+Example Sentence:
 
+"I grew up in France. I speak fluent ____."
+Expected Output: French
 
+| **Step** | **Component**                       | **Formula**                               | **Purpose**                                                                      | **Example**                                             | **Output**                           |
+| -------- | ----------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------ |
+| **1**    | **Inputs**                          | -                                         | LSTM receives the previous hidden state, previous cell state, and current input. | Previous Memory = **France**, Current Word = **fluent** | **x(t), h(t−1), c(t−1)**             |
+| **2**    | **Forget Gate (σ)**                 | (f_t=\sigma(W_f[h_{t-1},x_t]+b_f))        | Decides what information should be kept or forgotten from the previous memory.   | Sigmoid Output = **0.95**                               | Keep **95%** of "France".            |
+| **3**    | **Element-wise Multiplication (×)** | (f_t \times C_{t-1})                      | Multiplies forget gate output with previous cell state.                          | 0.95 × France                                           | Previous memory is retained.         |
+| **4**    | **Input Gate (σ)**                  | (i_t=\sigma(W_i[h_{t-1},x_t]+b_i))        | Decides how much new information should be stored.                               | Current Word = **fluent**, Sigmoid = **0.40**           | Store **40%** of new information.    |
+| **5**    | **Candidate Memory (tanh)**         | (\tilde{C_t}=\tanh(W_c[h_{t-1},x_t]+b_c)) | Creates new candidate information to add to memory.                              | tanh Output = **0.90**                                  | Useful new information is generated. |
+| **6**    | **Element-wise Multiplication (×)** | (i_t \times \tilde{C_t})                  | Determines how much candidate memory enters the cell state.                      | 0.40 × 0.90 = **0.36**                                  | New memory contribution = **0.36**   |
+| **7**    | **Cell State Update (+)**           | (C_t=f_tC_{t-1}+i_t\tilde{C_t})           | Combines retained old memory and new candidate memory.                           | (0.95 × France) + 0.36                                  | Updated Cell State **c(t)**          |
+| **8**    | **Output Gate (σ)**                 | (o_t=\sigma(W_o[h_{t-1},x_t]+b_o))        | Decides how much of the updated memory should be exposed.                        | Sigmoid Output = **0.98**                               | Reveal **98%** of memory.            |
+| **9**    | **tanh on Cell State**              | (\tanh(C_t))                              | Converts updated memory into values between **−1 and +1**.                       | tanh(c(t)) = **0.97**                                   | Normalized memory.                   |
+| **10**   | **Hidden State (×)**                | (h_t=o_t\times\tanh(C_t))                 | Produces the final hidden state for prediction and the next LSTM cell.           | 0.98 × 0.97 = **0.95**                                  | Hidden State **h(t)**                |
+| **11**   | **Prediction**                      | -                                         | Hidden state is used to predict the next word.                                   | "I speak fluent ____"                                   | **French** ✅                         |
 
+=========
