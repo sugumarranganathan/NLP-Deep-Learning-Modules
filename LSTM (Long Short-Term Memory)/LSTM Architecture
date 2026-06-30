@@ -1,6 +1,40 @@
 LSTM Architecture
 ------------------
 
+                               Long Short-Term Memory (LSTM)
+
+ c(t-1) ───────────────► ( × ) ─────────► ( + ) ─────────────────────────► c(t)
+                           ▲                 ▲
+                           │                 │
+                    ┌──────┘                 └──────────────┐
+                    │                                       │
+                 [ σ ]                                  ( × )
+              Forget Gate                               ▲   ▲
+                    ▲                                   │   │
+                    │                                 tanh [σ]
+                    │                                   │ Output
+ h(t-1) ────────────┼───────────────┬───────────────────┘ Gate
+                    │               │
+                    │            [ σ ]
+                    │         Input Gate
+                    │               │
+                    │             tanh
+                    │               │
+                    └──────────────►( × )
+                                    │
+                                    │
+ x(t) ──────────────────────────────┘
+
+
+ Legend:
+ (×)  = Element-wise Multiplication
+ (+)  = Element-wise Addition
+ [σ]  = Sigmoid Activation
+ tanh = Hyperbolic Tangent
+
+
+======================================
+
 Previous Cell State
       c(t−1)
          │
